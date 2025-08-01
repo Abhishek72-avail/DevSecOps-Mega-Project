@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Modern E-commerce Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading ShopEase...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>ShopEase</span>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-bar">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" placeholder="Search for products, brands and more..." id="search-input">
+                        <button class="search-btn" id="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="search-suggestions" id="search-suggestions"></div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="nav-menu">
+                    <a href="#" class="nav-link" data-section="home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="#" class="nav-link" data-section="categories">
+                        <i class="fas fa-th-large"></i>
+                        <span>Categories</span>
+                    </a>
+                    <a href="#" class="nav-link" data-section="deals">
+                        <i class="fas fa-fire"></i>
+                        <span>Deals</span>
+                    </a>
+                    <a href="#" class="nav-link cart-link" data-section="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                    <a href="#" class="nav-link" data-section="profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-content">
+            <div class="mobile-nav-header">
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>ShopEase</span>
+                </div>
+                <button class="mobile-nav-close" id="mobile-nav-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav-menu">
+                <a href="#" class="mobile-nav-link" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="mobile-nav-link" data-section="categories">
+                    <i class="fas fa-th-large"></i>
+                    <span>Categories</span>
+                </a>
+                <a href="#" class="mobile-nav-link" data-section="deals">
+                    <i class="fas fa-fire"></i>
+                    <span>Hot Deals</span>
+                </a>
+                <a href="#" class="mobile-nav-link" data-section="cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>My Cart</span>
+                    <span class="cart-count">0</span>
+                </a>
+                <a href="#" class="mobile-nav-link" data-section="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+        <!-- Home Section -->
+        <section class="section active" id="home-section">
+            <!-- Hero Banner -->
+            <div class="hero-banner">
+                <div class="hero-slider" id="hero-slider">
+                    <div class="hero-slide active">
+                        <div class="hero-content">
+                            <div class="container">
+                                <div class="hero-text">
+                                    <h1>Mega Sale</h1>
+                                    <p>Up to 80% off on fashion & electronics</p>
+                                    <button class="cta-btn">Shop Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-bg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"></div>
+                    </div>
+                    <div class="hero-slide">
+                        <div class="hero-content">
+                            <div class="container">
+                                <div class="hero-text">
+                                    <h1>New Arrivals</h1>
+                                    <p>Discover the latest trends in fashion</p>
+                                    <button class="cta-btn">Explore</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-bg" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"></div>
+                    </div>
+                    <div class="hero-slide">
+                        <div class="hero-content">
+                            <div class="container">
+                                <div class="hero-text">
+                                    <h1>Electronics</h1>
+                                    <p>Best deals on smartphones & gadgets</p>
+                                    <button class="cta-btn">Browse</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-bg" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"></div>
+                    </div>
+                </div>
+                <div class="hero-indicators" id="hero-indicators">
+                    <button class="indicator active" data-slide="0"></button>
+                    <button class="indicator" data-slide="1"></button>
+                    <button class="indicator" data-slide="2"></button>
+                </div>
+            </div>
+
+            <!-- Categories Section -->
+            <div class="categories-section">
+                <div class="container">
+                    <h2 class="section-title">Shop by Category</h2>
+                    <div class="categories-grid" id="categories-grid">
+                        <!-- Categories will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Products -->
+            <div class="featured-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Featured Products</h2>
+                        <button class="view-all-btn">View All</button>
+                    </div>
+                    <div class="products-grid" id="featured-products">
+                        <!-- Products will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deals Section -->
+            <div class="deals-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-fire"></i>
+                            Hot Deals
+                        </h2>
+                        <div class="deal-timer" id="deal-timer">
+                            <span class="timer-label">Ends in:</span>
+                            <div class="timer">
+                                <div class="timer-unit">
+                                    <span class="timer-value" id="hours">12</span>
+                                    <span class="timer-label">H</span>
+                                </div>
+                                <div class="timer-unit">
+                                    <span class="timer-value" id="minutes">34</span>
+                                    <span class="timer-label">M</span>
+                                </div>
+                                <div class="timer-unit">
+                                    <span class="timer-value" id="seconds">56</span>
+                                    <span class="timer-label">S</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-grid" id="deals-products">
+                        <!-- Deal products will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="section" id="categories-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">All Categories</h2>
+                    <div class="category-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="fashion">Fashion</button>
+                        <button class="filter-btn" data-filter="electronics">Electronics</button>
+                        <button class="filter-btn" data-filter="home">Home & Living</button>
+                        <button class="filter-btn" data-filter="beauty">Beauty</button>
+                    </div>
+                </div>
+                <div class="categories-detailed-grid" id="categories-detailed-grid">
+                    <!-- Detailed categories will be loaded -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Section -->
+        <section class="section" id="cart-section">
+            <div class="container">
+                <div class="cart-container">
+                    <div class="cart-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-shopping-cart"></i>
+                            My Cart
+                        </h2>
+                        <button class="clear-cart-btn" id="clear-cart-btn">Clear Cart</button>
+                    </div>
+                    <div class="cart-content" id="cart-content">
+                        <!-- Cart items will be loaded dynamically -->
+                    </div>
+                    <div class="cart-summary" id="cart-summary">
+                        <!-- Cart summary will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section class="section" id="profile-section">
+            <div class="container">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h2>Welcome, User!</h2>
+                            <p>Manage your account and orders</p>
+                        </div>
+                    </div>
+                    <div class="profile-menu">
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-box"></i>
+                            <span>My Orders</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Wishlist</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Addresses</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Payment Methods</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-headset"></i>
+                            <span>Help & Support</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Product Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="product-modal-content" id="product-modal-content">
+                <!-- Product details will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

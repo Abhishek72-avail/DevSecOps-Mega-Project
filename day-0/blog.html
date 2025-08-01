@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSecOps Blog - Professional Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* Google Material Design Colors */
+            --primary-color: #1976d2;
+            --primary-dark: #1565c0;
+            --primary-light: #42a5f5;
+            --secondary-color: #dc004e;
+            --accent-color: #00bcd4;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+            --surface-color: #ffffff;
+            --background-color: #fafafa;
+            --on-surface: #212121;
+            --on-surface-variant: #757575;
+            --outline: #e0e0e0;
+            --shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            --shadow-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            --shadow-4: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            --shadow-5: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--on-surface);
+            background: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Material Design Header */
+        .header {
+            background: var(--surface-color);
+            color: var(--on-surface);
+            padding: 0;
+            box-shadow: var(--shadow-2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--outline);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            color: var(--on-surface);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 16px 24px;
+            border-radius: 4px;
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(25, 118, 210, 0.08);
+            color: var(--primary-color);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--on-surface);
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Material Design Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)"/></svg>');
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 32px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--surface-color);
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            box-shadow: var(--shadow-2);
+        }
+
+        .cta-button:hover {
+            box-shadow: var(--shadow-3);
+            transform: translateY(-2px);
+        }
+
+        /* Material Design Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 24px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 48px;
+        }
+
+        /* Blog Posts */
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--on-surface);
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .post-card {
+            background: var(--surface-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow-1);
+            overflow: hidden;
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            border: 1px solid var(--outline);
+        }
+
+        .post-card:hover {
+            box-shadow: var(--shadow-3);
+            transform: translateY(-2px);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            position: relative;
+        }
+
+        .post-content {
+            padding: 24px;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--on-surface-variant);
+        }
+
+        .post-category {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .post-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: var(--on-surface);
+            line-height: 1.3;
+        }
+
+        .post-excerpt {
+            color: var(--on-surface-variant);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .read-more:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Material Design Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .widget {
+            background: var(--surface-color);
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: var(--shadow-1);
+            border: 1px solid var(--outline);
+        }
+
+        .widget-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: var(--on-surface);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .author-info {
+            text-align: center;
+        }
+
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            margin: 0 auto 16px;
+            box-shadow: var(--shadow-2);
+        }
+
+        .author-name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--on-surface);
+        }
+
+        .author-bio {
+            color: var(--on-surface-variant);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .categories-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .categories-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--outline);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .categories-list li:last-child {
+            border-bottom: none;
+        }
+
+        .categories-list a {
+            color: var(--on-surface);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .categories-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .post-count {
+            background: var(--background-color);
+            color: var(--on-surface-variant);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: var(--background-color);
+            color: var(--on-surface);
+            padding: 8px 16px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            border: 1px solid var(--outline);
+        }
+
+        .tag:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Material Design Footer */
+        .footer {
+            background: var(--surface-color);
+            color: var(--on-surface);
+            padding: 48px 0 24px;
+            margin-top: 48px;
+            border-top: 1px solid var(--outline);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--background-color);
+            color: var(--on-surface-variant);
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            border: 1px solid var(--outline);
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 960px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 32px 16px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .hero-content {
+                padding: 0 16px;
+            }
+
+            .nav-container {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 48px 0;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .post-title {
+                font-size: 20px;
+            }
+
+            .post-content {
+                padding: 16px;
+            }
+
+            .widget {
+                padding: 16px;
+            }
+
+            .main-content {
+                padding: 24px 16px;
+            }
+        }
+
+        /* Material Design Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .post-card {
+            animation: fadeInUp 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+        }
+
+        .post-card:nth-child(2) { animation-delay: 0.1s; }
+        .post-card:nth-child(3) { animation-delay: 0.2s; }
+        .post-card:nth-child(4) { animation-delay: 0.3s; }
+        .post-card:nth-child(5) { animation-delay: 0.4s; }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: var(--shadow-3);
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .fab:hover {
+            background: var(--primary-dark);
+            box-shadow: var(--shadow-4);
+            transform: scale(1.1);
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 48px;
+            border: 1px solid var(--outline);
+            border-radius: 24px;
+            background: var(--surface-color);
+            font-size: 14px;
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--on-surface-variant);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                DevSecOps Blog
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Modern DevSecOps</h1>
+            <p>Discover cutting-edge practices in development, security, and operations</p>
+            <a href="#posts" class="cta-button">
+                <i class="fas fa-arrow-down"></i>
+                Explore Articles
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Blog Posts -->
+        <section class="blog-posts" id="posts">
+            <h2 class="section-title">
+                <i class="fas fa-newspaper"></i>
+                Latest Posts
+            </h2>
+
+            <!-- Post 1 -->
+            <article class="post-card">
+                <div class="post-image">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-category">Security</span>
+                        <span><i class="fas fa-calendar"></i> January 15, 2025</span>
+                        <span><i class="fas fa-user"></i> Abhishek Kumar</span>
+                    </div>
+                    <h3 class="post-title">Advanced Container Security: Best Practices for 2025</h3>
+                    <p class="post-excerpt">
+                        Discover the latest container security strategies, from image scanning to runtime protection. 
+                        Learn how to implement zero-trust architecture in your containerized environments and protect 
+                        against emerging threats in cloud-native applications.
+                    </p>
+                    <a href="#" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="post-card">
+                <div class="post-image">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-category">DevOps</span>
+                        <span><i class="fas fa-calendar"></i> January 12, 2025</span>
+                        <span><i class="fas fa-user"></i> Abhishek Kumar</span>
+                    </div>
+                    <h3 class="post-title">CI/CD Pipeline Optimization: From Hours to Minutes</h3>
+                    <p class="post-excerpt">
+                        Transform your deployment pipeline with advanced optimization techniques. Learn about parallel 
+                        processing, intelligent caching, and automated testing strategies that can reduce your build 
+                        times by up to 80% while maintaining quality and security.
+                    </p>
+                    <a href="#" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="post-card">
+                <div class="post-image">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-category">Cloud</span>
+                        <span><i class="fas fa-calendar"></i> January 10, 2025</span>
+                        <span><i class="fas fa-user"></i> Abhishek Kumar</span>
+                    </div>
+                    <h3 class="post-title">Kubernetes Security Hardening: A Complete Guide</h3>
+                    <p class="post-excerpt">
+                        Master Kubernetes security with comprehensive hardening techniques. From RBAC configuration 
+                        to network policies, pod security standards, and admission controllers - everything you need 
+                        to secure your K8s clusters in production environments.
+                    </p>
+                    <a href="#" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Post 4 -->
+            <article class="post-card">
+                <div class="post-image">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-category">Automation</span>
+                        <span><i class="fas fa-calendar"></i> January 8, 2025</span>
+                        <span><i class="fas fa-user"></i> Abhishek Kumar</span>
+                    </div>
+                    <h3 class="post-title">Infrastructure as Code: Terraform vs. Pulumi in 2025</h3>
+                    <p class="post-excerpt">
+                        Compare the leading IaC tools and discover which one fits your team's needs. Explore advanced 
+                        features, performance benchmarks, and real-world use cases to make an informed decision for 
+                        your infrastructure automation strategy.
+                    </p>
+                    <a href="#" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <aside class="sidebar">
+            <!-- Search Widget -->
+            <div class="widget">
+                <h3 class="widget-title">
+                    <i class="fas fa-search"></i>
+                    Search
+                </h3>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search articles...">
+                </div>
+            </div>
+
+            <!-- Author Widget -->
+            <div class="widget">
+                <h3 class="widget-title">
+                    <i class="fas fa-user"></i>
+                    About Author
+                </h3>
+                <div class="author-info">
+                    <div class="author-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="author-name">Abhishek Kumar</div>
+                    <p class="author-bio">
+                        Senior DevSecOps Engineer passionate about cloud security, 
+                        automation, and building resilient systems. Sharing insights 
+                        from real-world implementations.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Categories Widget -->
+            <div class="widget">
+                <h3 class="widget-title">
+                    <i class="fas fa-folder-open"></i>
+                    Categories
+                </h3>
+                <ul class="categories-list">
+                    <li>
+                        <a href="#">Security</a>
+                        <span class="post-count">12</span>
+                    </li>
+                    <li>
+                        <a href="#">DevOps</a>
+                        <span class="post-count">8</span>
+                    </li>
+                    <li>
+                        <a href="#">Cloud</a>
+                        <span class="post-count">15</span>
+                    </li>
+                    <li>
+                        <a href="#">Automation</a>
+                        <span class="post-count">6</span>
+                    </li>
+                    <li>
+                        <a href="#">Monitoring</a>
+                        <span class="post-count">4</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tags Widget -->
+            <div class="widget">
+                <h3 class="widget-title">
+                    <i class="fas fa-tags"></i>
+                    Popular Tags
+                </h3>
+                <div class="tags">
+                    <a href="#" class="tag">Docker</a>
+                    <a href="#" class="tag">Kubernetes</a>
+                    <a href="#" class="tag">AWS</a>
+                    <a href="#" class="tag">Terraform</a>
+                    <a href="#" class="tag">Jenkins</a>
+                    <a href="#" class="tag">Security</a>
+                    <a href="#" class="tag">Monitoring</a>
+                    <a href="#" class="tag">CI/CD</a>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="social-link" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" class="social-link" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link" title="Medium">
+                    <i class="fab fa-medium"></i>
+                </a>
+            </div>
+            <p>&copy; 2025 DevSecOps Blog. Made with Material Design principles.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="scrollToTop()" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Material Design smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                header.style.boxShadow = 'var(--shadow-3)';
+            } else {
+                header.style.boxShadow = 'var(--shadow-2)';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.post-card, .widget').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(24px)';
+            el.style.transition = 'all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1)';
+            observer.observe(el);
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const posts = document.querySelectorAll('.post-card');
+                
+                posts.forEach(post => {
+                    const title = post.querySelector('.post-title').textContent.toLowerCase();
+                    const excerpt = post.querySelector('.post-excerpt').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                        post.style.display = 'block';
+                    } else {
+                        post.style.display = searchTerm ? 'none' : 'block';
+                    }
+                });
+            });
+        }
+
+        // Floating Action Button
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide FAB based on scroll position
+        window.addEventListener('scroll', () => {
+            const fab = document.querySelector('.fab');
+            if (window.scrollY > 300) {
+                fab.style.opacity = '1';
+                fab.style.transform = 'scale(1)';
+            } else {
+                fab.style.opacity = '0';
+                fab.style.transform = 'scale(0.8)';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Ripple effect for buttons
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add('ripple');
+
+            const ripple = button.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            button.appendChild(circle);
+        }
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.cta-button, .read-more, .fab').forEach(button => {
+            button.addEventListener('click', createRipple);
+        });
+
+        // Add ripple CSS
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 600ms linear;
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+            
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // Initialize FAB visibility
+        document.querySelector('.fab').style.opacity = '0';
+        document.querySelector('.fab').style.transform = 'scale(0.8)';
+        document.querySelector('.fab').style.transition = 'all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1)';
+    </script>
+</body>
+</html>
